@@ -1,51 +1,42 @@
 <template>
   <div class="app-container">
-    <el-table
-      v-loading="listLoading"
-      :data="list"
-      element-loading-text="Loading"
-      border
-      fit
-      highlight-current-row>
-      <el-table-column align="center" label="ID" width="95">
-        <template slot-scope="scope">
-          {{ scope.$index }}
-        </template>
-      </el-table-column>
-      <el-table-column label="Title">
-        <template slot-scope="scope">
-          {{ scope.row.title }}
-        </template>
-      </el-table-column>
-      <el-table-column label="Author" width="110" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.author }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="Pageviews" width="110" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.pageviews }}
-        </template>
-      </el-table-column>
-      <el-table-column class-name="status-col" label="Status" width="110" align="center">
-        <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column align="center" prop="created_at" label="Display_time" width="200">
-        <template slot-scope="scope">
-          <i class="el-icon-time"/>
-          <span>{{ scope.row.display_time }}</span>
-        </template>
-      </el-table-column>
-    </el-table>
+    <!-- height="100%" -->
+    <Table
+      :tableColumn="tableColumn"
+      :data="tableData"
+      :stripe='!true'
+      :border='!true'
+      highlight-current-row
+      :row-class-name="tableRowClassName"
+    >
+      <!-- <template slot="select" slot-scope="scope">
+        kkkkkkkk{{scope}}
+      </template> -->
+      <template slot="table-column" slot-scope="scope">
+        dddd{{scope}}
+      </template>
+      <!-- <template slot="otherButtons">
+        sss
+      </template> -->
+    </Table>
   </div>
 </template>
 
 <script>
-import { getList } from '@/api/table'
+import { getList, getBaseList } from '@/api/table'
+import { Table } from '@/components'
+
+const tableColumn = [
+  { type:'index', prop: '', label:'#', width:'40', sortable: true},
+  { prop: 'id', label: '数据库id', width: '180' },
+  { prop: 'title', label: '标题', width: '180' },
+  { prop: 'display_time', label: '日期', width: '180' },
+]
 
 export default {
+  components: {
+    Table
+  },
   filters: {
     statusFilter(status) {
       const statusMap = {
@@ -58,21 +49,48 @@ export default {
   },
   data() {
     return {
-      list: null,
-      listLoading: true
+      listLoading: true,
+      tableData: null,
+      tableColumn
     }
   },
   created() {
+    console.log(this)
     this.fetchData()
   },
   methods: {
     fetchData() {
-      this.listLoading = true
-      getList(this.listQuery).then(response => {
-        this.list = response.data.items
-        this.listLoading = false
+      // this.listLoading = true
+      getList({
+        jsonParam: {
+          columnName: ''
+        },
+        page: 1,
+        rows: 10
+      }).then(response => {
+        this.tableData = response.data.items
+        console.log(this.list)
+        // this.listLoading = false
       })
+    },
+    tableRowClassName({row, rowIndex}) {
+      if (rowIndex === 1) {
+        return 'warning-row'
+      } else if (rowIndex === 3) {
+        return 'success-row'
+      }
+      return ''
     }
   }
 }
 </script>
+
+<style>
+  .el-table .warning-row {
+    background: oldlace
+  }
+
+  .el-table .success-row {
+    background: #f0f9eb
+  }
+</style>

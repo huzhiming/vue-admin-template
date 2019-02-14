@@ -7,3 +7,14 @@ export function getList(params) {
     params
   })
 }
+
+export function getBaseList(params) {
+  return request({
+    url: 'columnInfo/findColumnListByPage.json',
+    method: 'post',
+    data: {
+      page: 1,
+      rows: 10
+    }
+  })
+}

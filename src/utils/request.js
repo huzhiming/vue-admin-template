@@ -3,6 +3,9 @@ import { Message, MessageBox } from 'element-ui'
 import store from '../store'
 import { getToken } from '@/utils/auth'
 
+// process.env.BASE_API = 'http://sysapi.yingfeng365.top/jsyf-sys/'
+
+// axios.defaults.headers.common['Content-Type'] = 'application/json;charset=UTF-8'
 // 创建axios实例
 const service = axios.create({
   baseURL: process.env.BASE_API, // api 的 base_url

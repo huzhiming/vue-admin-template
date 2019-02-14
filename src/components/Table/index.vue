@@ -1,14 +1,12 @@
 <template>
   <div>
-    <slot name="select" :item="$attrs.data">
+    <slot :item="$attrs.data" name="select" />
 
-    </slot>
     <el-table
       v-bind="$attrs"
       v-on="$listeners"
     >
       <el-table-column v-for="(item) in $attrs.tableColumn" :key="item.prop" v-bind="item" />
-
       <!-- <el-table-column
         label="日期"
         width="180"

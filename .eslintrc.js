@@ -14,7 +14,7 @@ module.exports = {
   // add your custom rules here
   //it is base on https://github.com/vuejs/eslint-config-vue
   rules: {
-    "vue/max-attributes-per-line": [2, {
+    "vue/max-attributes-per-line": [2, {//vue每行最大属性
       "singleline": 10,
       "multiline": {
         "max": 1,
@@ -34,7 +34,7 @@ module.exports = {
     'camelcase': [0, {
       'properties': 'always'
     }],
-    'comma-dangle': [2, 'never'],
+    'comma-dangle': [2, 'never'],//对象字面量项尾不能有逗号
     'comma-spacing': [2, {
       'before': false,
       'after': true
@@ -44,17 +44,17 @@ module.exports = {
     'curly': [2, 'multi-line'],
     'dot-location': [2, 'property'],
     'eol-last': 2,
-    'eqeqeq': [2, 'allow-null'],
-    'generator-star-spacing': [2, {
+    'eqeqeq': [2, 'allow-null'],//必须使用全等
+    'generator-star-spacing': [2, {//生成器函数*的前后空格
       'before': true,
       'after': true
     }],
     'handle-callback-err': [2, '^(err|error)$'],
-    'indent': [2, 2, {
+    'indent': [2, 2, {//缩进风格
       'SwitchCase': 1
     }],
     'jsx-quotes': [2, 'prefer-single'],
-    'key-spacing': [2, {
+    'key-spacing': [2, {//对象字面量中冒号的前后空格
       'beforeColon': false,
       'afterColon': true
     }],
@@ -139,7 +139,7 @@ module.exports = {
     }],
     'no-unreachable': 2,
     'no-unsafe-finally': 2,
-    'no-unused-vars': [2, {
+    'no-unused-vars': [0, { //不能有声明后未被使用的变量或参数
       'vars': 'all',
       'args': 'none'
     }],
@@ -159,7 +159,7 @@ module.exports = {
       }
     }],
     'padded-blocks': [2, 'never'],
-    'quotes': [2, 'single', {
+    'quotes': [2, 'single', {//引号类型 `` "" ''
       'avoidEscape': true,
       'allowTemplateLiterals': true
     }],

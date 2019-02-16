@@ -9,6 +9,7 @@ export function login(username, password) {
       password
     }
   })
+  // return { code: 20000, data: { token: 'admin' }}
 }
 
 export function getInfo(token) {
